@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Container to hold the items in a grid layout */
+        .container {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+            padding: 20px;
+            margin: 0 10px;
+        }
+
+        /* Style for each item in the grid */
+        .container > div {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect for the item */
+        .container > div:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styling for image */
+        img {
+    width: 100px; /* Fixed width */
+    height: 150px; /* Fixed height */
+    object-fit: cover; /* Ensures the image covers the area without distorting */
+    border-radius: 8px; /* Rounded corners for a cleaner look */
+}
+
+        /* Styling for the text content */
+        .container > div > div {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .container > div > div span {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Style for price with color */
+        .price {
+            font-size: 16px;
+            color: #2a9d8f;
+            font-weight: bold;
+        }
+
+       
+        /* Container for the back button */
+        .back-btn-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background-color: #e76f51;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: #d65a41;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div class="container" id="parent"></div>
+
+    <div class="back-btn-container">
+        <a href="day29.html" class="back-btn">Back to Shop</a>
+    </div>
+
+    <script>
+        let getdata = JSON.parse(localStorage.getItem("details"));
+        console.log(getdata);
+
+        let parent = document.getElementById("parent");
+
+        getdata.map((val) => {
+            console.log(val);
+
+            var child = document.createElement("div");
+            var childa = document.createElement("div");
+            var childb = document.createElement("div");
+            var childc = document.createElement("div");
+            var childd = document.createElement("div");
+            var img = document.createElement("img");
+           
+
+            img.src = val.image;
+
+            // Populate divs with the correct data
+            childa.innerHTML = `<span>ID:</span> ${val.id}`;
+            childb.innerHTML = `<span>Title:</span> ${val.title}`;
+            childc.innerHTML = `<span>Category:</span> ${val.category}`;
+            childd.innerHTML = `<span>Price:</span> <span class="price">$${val.price}</span>`;
+
+          
+
+            // Append all the elements to the container
+            child.append(img, childa, childb, childc, childd);
+            parent.append(child);
+        });
+    </script>
+</body>
+</html>
